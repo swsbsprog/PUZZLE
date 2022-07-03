@@ -18,6 +18,9 @@ public class SnapPiece : MonoBehaviour, IDropHandler
             if(IsRightPosition(data.pointerDrag))
             {
                 SetBlink(data.pointerDrag);
+
+                // 점수증가.
+                GameBoard.instance.AddScore();
             }
         }
     }
@@ -29,11 +32,11 @@ public class SnapPiece : MonoBehaviour, IDropHandler
 
     private void SetBlink(GameObject pointerDrag)
     {
-        // 방식1, 코루틴으로
-        StartCoroutine(SetBlinkCo(pointerDrag));    // 함수로 실행하는 방식 <- 추천
+        //// 방식1, 코루틴으로
+        //StartCoroutine(SetBlinkCo(pointerDrag));    // 함수로 실행하는 방식 <- 추천
         //StartCoroutine("SetBlinkCo", pointerDrag);  // 이름으로 실행하는 방식
-
         // 방식2, 애니메이터
+        pointerDrag.GetComponent<Animator>().SetTrigger("blink");
     }
 
     private IEnumerator SetBlinkCo(GameObject pointerDrag)

@@ -5,6 +5,25 @@ using UnityEngine.UI;
 
 public class GameBoard : MonoBehaviour
 {
+    static public GameBoard instance;
+    private void Awake(){instance = this; }
+    private void OnDestroy() { instance = null; }
+    //private void OnDestroy() => instance = null;
+
+    public int score;
+    public int MaxCount = 12;
+    public Text scoreText;
+    public GameObject stageClearUIgo;
+    public void AddScore()
+    {
+        score++;
+        scoreText.text = score.ToString();
+        if(score == MaxCount)
+        {
+            stageClearUIgo.SetActive(true);
+        }
+    }
+
     //public int publicInt =1;
     //private int privateInt = 2;
 
